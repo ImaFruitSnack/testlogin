@@ -24,7 +24,7 @@ async function run() {
     const query = { user: 'Fruit' };
     const user = await users.findOne(query);
     console.log(user);
-	global.mtest = user['user'];
+	global.mtest = user;
 	return mtest
   } finally {
     await client.close();
@@ -35,11 +35,12 @@ run().catch(console.dir);
 
 application.get(`/`, async(req, res) => {
 	res.sendFile(path.join(path.join(__dirname, `public`), `webfile.html`))
+	res.render('myfirst1' , {users:mtest}); 
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write("The date and time are currently: " + dt.myDateTime());
 	'res.write(req.url);'
 	let q = url.parse(req.url, true).query;
-	const txt = q.year + " " + q.month + await mtest;
+	const txt = q.year + " " + q.month + await mtest['user'];
 	let data = await fs.readFileSync('./public/webfile.html');
 	res.write(data);
 	res.end(txt);
