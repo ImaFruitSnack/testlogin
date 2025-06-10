@@ -24,7 +24,7 @@ async function run() {
     const query = { user: 'Fruit' };
     const user = await users.findOne(query);
     console.log(user);
-	global.mtest = user.name;
+	global.mtest = user;
 	return mtest
   } finally {
     await client.close();
