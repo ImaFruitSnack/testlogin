@@ -36,7 +36,7 @@ run().catch(console.dir);
 
 application.get(`/`, async(req, res) => {
 	// res.sendFile(path.join(path.join(__dirname, `views`), `webfile.html`))
-	res.render('views/webfile', mtest);
+	res.render('views/webfile');
 	/* 
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write("The date and time are currently: " + dt.myDateTime());
