@@ -12,7 +12,7 @@ global.mtest = 0;
 
 const application = express();
 application.use(bodyParser.json())
-application.use(express.static(path.join(__dirname, 'public')));
+application.use(express.static(path.join(__dirname, 'views')));
 application.set('view engine' , 'ejs');
 
 
@@ -35,8 +35,8 @@ run().catch(console.dir);
 
 
 application.get(`/`, async(req, res) => {
-	// res.sendFile(path.join(path.join(__dirname, `public`), `webfile.html`))
-	res.render('public/webfile', mtest);
+	// res.sendFile(path.join(path.join(__dirname, `views`), `webfile.html`))
+	res.render('views/webfile', mtest);
 	/* 
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write("The date and time are currently: " + dt.myDateTime());
@@ -58,7 +58,7 @@ async function listDatabases(client){
 
 /*
 application.get('/subserver', async(req,res) => {
-	res.sendFile(path.join(path.join(__dirname, `public`), `webfile2.html`))
+	res.sendFile(path.join(path.join(__dirname, `views`), `webfile2.html`))
 })
 */
 
