@@ -11,8 +11,8 @@ const port = process.env.PORT || 8080
 global.mtest = 0;
 
 const application = express();
-//application.use(bodyParser.json())
-//application.use(express.static(path.join(__dirname, 'views')));
+application.use(bodyParser.json())
+application.use(express.static(path.join(__dirname, 'public')));
 application.set('view engine' , 'ejs');
 
 
@@ -56,14 +56,16 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
-/*
-application.get('/subserver', async(req,res) => {
-	res.sendFile(path.join(path.join(__dirname, `views`), `webfile2.html`))
-})
-*/
 
-//let server = http.createServer(application)
-//server.listen(8080, `0.0.0.0`)
+application.get('/subserver', async(req,res) => {
+	res.sendFile(path.join(path.join(__dirname, `public`), `webfile2.html`))
+})
+
+
+let server = http.createServer(application)
+server.listen(8080, `0.0.0.0`)
+/*
 application.listen(8080 , () => {
 	console.log("ggs");
 })
+*/
