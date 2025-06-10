@@ -44,7 +44,7 @@ application.get(`/`, async(req, res) => {
 	let data = await fs.readFileSync('./public/webfile.html');
 	const database = client.db('testdata');
 	const collection = database.collection('test');
-	let tst = collection.find();
+	const tst = collection.find();
 	res.write(tst);
 	res.write(data);
 	res.end(txt);
