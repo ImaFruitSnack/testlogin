@@ -12,7 +12,7 @@ global.mtest = 0;
 
 const application = express();
 application.use(bodyParser.json())
-application.use(express.static(path.join(__dirname, 'views')));
+//application.use(express.static(path.join(__dirname, 'views')));
 application.set('view engine' , 'ejs');
 
 
