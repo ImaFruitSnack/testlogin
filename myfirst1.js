@@ -42,6 +42,10 @@ application.get(`/`, async(req, res) => {
 	let q = url.parse(req.url, true).query;
 	const txt = q.year + " " + q.month;
 	let data = await fs.readFileSync('./public/webfile.html');
+	const database = client.db('testdata');
+	const collection = database.collection('test');
+	let tst = collection.find();
+	res.write(tst);
 	res.write(data);
 	res.end(txt);
 })
