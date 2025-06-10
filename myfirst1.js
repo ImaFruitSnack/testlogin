@@ -24,6 +24,7 @@ async function run() {
     const movie = await movies.findOne(query);
     console.log(movie);
 	const mtest = '${movie.name}';
+	return mtest
   } finally {
     await client.close();
   }
