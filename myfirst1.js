@@ -23,6 +23,7 @@ async function run() {
     const query = { title: 'Back to the Future' };
     const movie = await movies.findOne(query);
     console.log(movie);
+	const mtest = '${movie.name}';
   } finally {
     await client.close();
   }
@@ -36,7 +37,7 @@ application.get(`/`, async(req, res) => {
 	res.write("The date and time are currently: " + dt.myDateTime());
 	'res.write(req.url);'
 	let q = url.parse(req.url, true).query;
-	const txt = q.year + " " + q.month;
+	const txt = q.year + " " + q.month + mtest;
 	let data = await fs.readFileSync('./public/webfile.html');
 	res.write(data);
 	res.end(txt);
