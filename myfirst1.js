@@ -6,7 +6,7 @@ const http = require(`node:http`);
 const dt = require('./myfirstmodule');
 const url = require('url');
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://matthewmwork9:wWEEsSmiUPLbInQy@cluster0.c67oyxx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.mongoToken;
 
 const application = express();
 application.use(bodyParser.json())
