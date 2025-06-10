@@ -35,16 +35,18 @@ run().catch(console.dir);
 
 
 application.get(`/`, async(req, res) => {
-	'res.sendFile(path.join(path.join(__dirname, `public`), `webfile.html`))'
+	// res.sendFile(path.join(path.join(__dirname, `public`), `webfile.html`))
 	res.render('public/webfile', mtest);
-	'res.writeHead(200, {'Content-Type': 'text/html'});'
-	'res.write("The date and time are currently: " + dt.myDateTime());'
-	'res.write(req.url);'
+	/* 
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.write("The date and time are currently: " + dt.myDateTime());
+	res.write(req.url);
 	let q = url.parse(req.url, true).query;
 	const txt = q.year + " " + q.month + await mtest['user'];
 	let data = await fs.readFileSync('./public/webfile.html');
-	'res.write(data);'
-	'res.end(txt);'
+	res.write(data);
+	res.end(txt);
+	*/
 })
 
 async function listDatabases(client){
@@ -54,9 +56,11 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
+/*
 application.get('/subserver', async(req,res) => {
 	res.sendFile(path.join(path.join(__dirname, `public`), `webfile2.html`))
 })
+*/
 
 let server = http.createServer(application)
 server.listen(8080, `0.0.0.0`)
