@@ -11,7 +11,7 @@ const port = process.env.PORT || 8080
 global.mtest = 0;
 
 const application = express();
-application.use(bodyParser.json())
+//application.use(bodyParser.json())
 //application.use(express.static(path.join(__dirname, 'views')));
 application.set('view engine' , 'ejs');
 
