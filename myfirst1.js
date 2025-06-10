@@ -47,7 +47,6 @@ application.get(`/`, async(req, res) => {
 	for await (const doc of colls) {
 		console.log(doc)
 	}
-	res.write(doc);
 	res.write(data);
 	res.end(txt);
 })
