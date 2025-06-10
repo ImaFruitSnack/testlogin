@@ -44,6 +44,9 @@ application.get(`/`, async(req, res) => {
 	let data = await fs.readFileSync('./public/webfile.html');
 	const database = client.db('testdata');
 	const colls = database.listCollections();
+	for await (const doc of colls) {
+		console.log(doc)
+	}
 	res.write(data);
 	res.end(txt);
 })
