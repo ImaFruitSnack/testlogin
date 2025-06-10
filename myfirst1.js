@@ -5,11 +5,21 @@ const fs = require(`node:fs`);
 const http = require(`node:http`);
 const dt = require('./myfirstmodule');
 const url = require('url');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://matthewmwork9:wWEEsSmiUPLbInQy@cluster0.c67oyxx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const application = express();
 application.use(bodyParser.json())
 application.use(express.static(path.join(__dirname, 'public')));
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
 
 application.get(`/`, async(req, res) => {
 	res.sendFile(path.join(path.join(__dirname, `public`), `webfile.html`))
