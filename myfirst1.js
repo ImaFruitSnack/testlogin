@@ -43,9 +43,10 @@ application.get(`/`, async(req, res) => {
 	const txt = q.year + " " + q.month;
 	let data = await fs.readFileSync('./public/webfile.html');
 	const database = client.db('testdata');
-	const colls = database.listCollections();
-	for await (const doc of colls) {
-		console.log(doc)
+	const colls = database.collection<test>('users');
+	const usercursor = colls.find();
+	for await (const user of usercursor) {
+		console.log('${user.name}');
 	}
 	res.write(data);
 	res.end(txt);
