@@ -12,19 +12,15 @@ const application = express();
 application.use(bodyParser.json())
 application.use(express.static(path.join(__dirname, 'public')));
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+const client = new MongoClient(uri);
 
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
+	await listDatabases(client);
+	
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
@@ -32,6 +28,7 @@ async function run() {
     await client.close();
   }
 }
+run().catch(console.dir);
 
 
 application.get(`/`, async(req, res) => {
@@ -52,10 +49,16 @@ application.get(`/`, async(req, res) => {
 	res.end(txt);
 })
 
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+ 
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
 application.get('/subserver', async(req,res) => {
 	res.sendFile(path.join(path.join(__dirname, `public`), `webfile2.html`))
 })
 
-run().catch(console.dir);
 let server = http.createServer(application)
 server.listen(8080, `0.0.0.0`)
