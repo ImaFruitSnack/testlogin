@@ -13,6 +13,7 @@ global.mtest = 0;
 const application = express();
 application.use(bodyParser.json())
 application.use(express.static(path.join(__dirname, 'public')));
+application.set('view engine' , 'ejs');
 
 
 const client = new MongoClient(uri);
@@ -35,7 +36,7 @@ run().catch(console.dir);
 
 application.get(`/`, async(req, res) => {
 	'res.sendFile(path.join(path.join(__dirname, `public`), `webfile.html`))'
-	res.render('public/webfile',mtest);
+	res.render('public/webfile', mtest);
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write("The date and time are currently: " + dt.myDateTime());
 	'res.write(req.url);'
