@@ -43,7 +43,6 @@ application.get(`/`, async(req, res) => {
 	const txt = q.year + " " + q.month;
 	let data = await fs.readFileSync('./public/webfile.html');
 	res.write(data);
-	run().catch(console.dir);
 	res.end(txt);
 })
 
@@ -51,6 +50,6 @@ application.get('/subserver', async(req,res) => {
 	res.sendFile(path.join(path.join(__dirname, `public`), `webfile2.html`))
 })
 
-
+run().catch(console.dir);
 let server = http.createServer(application)
 server.listen(8080, `0.0.0.0`)
