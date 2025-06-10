@@ -18,13 +18,13 @@ application.use(express.static(path.join(__dirname, 'public')));
 const client = new MongoClient(uri);
 async function run() {
   try {
-    const database = client.db('sample_mflix');
-    const movies = database.collection('movies');
-    // Queries for a movie that has a title value of 'Back to the Future'
-    const query = { title: 'Back to the Future' };
-    const movie = await movies.findOne(query);
-    console.log(movie);
-	const mtest = '${movie.name}';
+    const database = client.db('testdata');
+    const users = database.collection('test');
+    // Queries for a user that has a user value of 'Fruit'
+    const query = { user: 'Fruit' };
+    const user = await users.findOne(query);
+    console.log(user);
+	const mtest = '${user.name}';
 	return mtest
   } finally {
     await client.close();
