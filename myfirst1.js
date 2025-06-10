@@ -8,7 +8,7 @@ const url = require('url');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.mongoToken;
 const port = process.env.PORT || 8080
-let global.mtest = 0;
+global.mtest = 0;
 
 const application = express();
 application.use(bodyParser.json())
