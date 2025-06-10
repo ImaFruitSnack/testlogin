@@ -12,19 +12,17 @@ const application = express();
 application.use(bodyParser.json())
 application.use(express.static(path.join(__dirname, 'public')));
 
-const client = new MongoClient(uri);
 
+const client = new MongoClient(uri);
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-	await listDatabases(client);
-	
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    const database = client.db('sample_mflix');
+    const movies = database.collection('movies');
+    // Queries for a movie that has a title value of 'Back to the Future'
+    const query = { title: 'Back to the Future' };
+    const movie = await movies.findOne(query);
+    console.log(movie);
   } finally {
-    // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
@@ -39,12 +37,6 @@ application.get(`/`, async(req, res) => {
 	let q = url.parse(req.url, true).query;
 	const txt = q.year + " " + q.month;
 	let data = await fs.readFileSync('./public/webfile.html');
-	const database = client.db('testdata');
-	const colls = database.collection();
-	const usercursor = colls.find();
-	for await (const user of usercursor) {
-		console.log('${user.name}');
-	}
 	res.write(data);
 	res.end(txt);
 })
