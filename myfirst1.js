@@ -64,4 +64,6 @@ application.get('/subserver', async(req,res) => {
 
 //let server = http.createServer(application)
 //server.listen(8080, `0.0.0.0`)
-application.listen(8080 , ())
+application.listen(8080 , () => {
+	console.log("ggs");
+})
