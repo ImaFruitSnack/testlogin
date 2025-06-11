@@ -32,7 +32,7 @@ async function run() {
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
     console.log(user);
-	if (user['Password'] == uservalue['Password']) {
+	if (user['password'] == uservalue['password']) {
 		global.mtest = user;
 		return mtest
 	}
@@ -59,7 +59,7 @@ application.get(`/`, async(req, res) => {
 application.post('/submit' , (req , res) => {
 	global.uservalue = req.body;
 	console.log("username got " + uservalue['username']);
-	console.log("Password got " + uservalue['Password']);
+	console.log("Password got " + uservalue['password']);
 	run().catch(console.dir);
 	res.redirect('/subserver');
 	
