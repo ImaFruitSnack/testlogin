@@ -4,14 +4,14 @@
 <h1>My Header</h1>
 
 <p>My paragraph.</p>
-<p><%= user %></p>
+<%
+let user = null;
+%>
 <img src="testpic.png" width="104" height="142"></img>
 <form action="/submit" method="POST">
 <label for="username">Username:</label>
 <input type="text" id="username" name="username" />
-<button type="submit">Submit</button>
+<button type="submit" onclick="document.location='./subserver'">Submit</button>
 </form>
-
-<button onclick="document.location='./subserver'">click me</button>
 </body>
 </html>

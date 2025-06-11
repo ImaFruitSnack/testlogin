@@ -9,7 +9,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.mongoToken;
 const port = process.env.PORT || 8080
 global.mtest = 0;
-global.uservalue = 'Fruit';
+global.uservalue = null;
 
 
 
@@ -40,12 +40,12 @@ async function run() {
 
 application.get(`/`, async(req, res) => {
 	// res.sendFile(path.join(path.join(__dirname, `views`), `index.html`))
-	res.render('pages/index', await mtest); 
+	res.render('pages/index'); 
 	//res.writeHead(200, {'Content-Type': 'text/html'});
 	//res.write("The date and time are currently: " + dt.myDateTime());
 	//res.write(req.url);
 	let q = url.parse(req.url, true).query;
-	const txt = q.year + " " + q.month + await mtest['user'];
+	const txt = q.year + " " + q.month;
 	let data = await fs.readFileSync('./views/pages/index.ejs');
 	res.write(data);
 	res.end(txt);
@@ -69,7 +69,7 @@ async function listDatabases(client){
 
 
 application.get('/subserver', async(req,res) => {
-	res.sendFile(path.join(path.join(__dirname, `public`), `webfile2.html`))
+	res.render('pages/login', await mtest);
 })
 
 
