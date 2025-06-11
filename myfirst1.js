@@ -11,6 +11,7 @@ const port = process.env.PORT || 8080
 global.mtest = 0;
 global.uservalue = null;
 global.Password = null;
+global.loggedin = null;
 
 
 
@@ -36,11 +37,12 @@ async function run() {
 		global.mtest = user;
 		console.log("success");
 		return mtest;
-		res.redirect('/subserver');
+		global.loggedin = true;
 	} else {
 		console.log(user['password']);
 		console.log(uservalue['password']);
 		console.log(user['password'].toString() == uservalue['password'].toString());
+		global.loggedin = false;
 	}
   } finally {
     await client.close();
@@ -67,6 +69,11 @@ application.post('/submit' , (req , res) => {
 	console.log("username got " + uservalue['username']);
 	console.log("Password got " + uservalue['password']);
 	run().catch(console.dir);
+	if (loggedin == true) {
+		res.redirect('/subserver');
+	} else if (loggedin == false) {
+		alert("username or password incorrect");
+	}
 	
 	
 })
