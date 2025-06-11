@@ -24,6 +24,7 @@ application.use(express.urlencoded({ extended: true }));
 const client = new MongoClient(uri);
 async function run() {
   try {
+	const client = new MongoClient(uri);
     const database = client.db('testdata');
     const users = database.collection('test');
     // Queries for a user that has a user value of 'Fruit'
@@ -56,6 +57,7 @@ application.post('/submit' , (req , res) => {
 	global.uservalue = req.body;
 	console.log("username got" + uservalue['username']);
 	run().catch(console.dir);
+	res.redirect('/subserver');
 	
 	
 })
