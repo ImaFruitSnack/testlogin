@@ -36,6 +36,7 @@ async function run() {
 		global.mtest = user;
 		console.log("success");
 		return mtest;
+		res.redirect('/subserver');
 	} else {
 		console.log(user['password']);
 		console.log(uservalue['password']);
@@ -66,7 +67,6 @@ application.post('/submit' , (req , res) => {
 	console.log("username got " + uservalue['username']);
 	console.log("Password got " + uservalue['password']);
 	run().catch(console.dir);
-	res.redirect('/subserver');
 	
 	
 })
