@@ -39,6 +39,7 @@ async function run() {
 	} else {
 		console.log(user['password']);
 		console.log(uservalue['password']);
+		console.log(user['password'].toString() == uservalue['password'].toString());
 	}
   } finally {
     await client.close();
