@@ -68,7 +68,7 @@ application.post('/submit' , (req , res) => {
 	global.uservalue = req.body;
 	console.log("username got " + uservalue['username']);
 	console.log("Password got " + uservalue['password']);
-	run().catch(console.dir);
+	await run().catch(console.dir);
 	if (loggedin == true) {
 		res.redirect('/subserver');
 	} else if (loggedin == false) {
