@@ -32,7 +32,7 @@ async function run() {
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
     console.log(user);
-	if (user['password'] == uservalue['password']) {
+	if (user['password'].toString() == uservalue['password'].toString()) {
 		global.mtest = user;
 		console.log("success");
 		return mtest;
