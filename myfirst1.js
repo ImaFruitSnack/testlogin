@@ -55,7 +55,7 @@ application.get(`/`, async(req, res) => {
 
 application.post('/submit' , (req , res) => {
 	global.uservalue = req.body;
-	console.log("username got" + uservalue);
+	console.log("username got" + uservalue['username']);
 	
 })
 
