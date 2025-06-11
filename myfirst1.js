@@ -9,7 +9,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.mongoToken;
 const port = process.env.PORT || 8080
 global.mtest = 0;
-global.usname = 0;
+global.uservalue = 'Fruit';
 
 
 
