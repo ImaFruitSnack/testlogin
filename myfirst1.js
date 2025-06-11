@@ -34,7 +34,11 @@ async function run() {
     console.log(user);
 	if (user['password'] == uservalue['password']) {
 		global.mtest = user;
-		return mtest
+		console.log("success");
+		return mtest;
+	} else {
+		console.log(user['password']);
+		console.log(uservalue['password']);
 	}
   } finally {
     await client.close();
