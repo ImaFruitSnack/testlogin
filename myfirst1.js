@@ -11,10 +11,14 @@ const port = process.env.PORT || 8080
 global.mtest = 0;
 global.usname = 0;
 
+
+
 const application = express();
 application.use(bodyParser.json())
 application.use(express.static(path.join(__dirname, 'public')));
 application.set('view engine' , 'ejs');
+application.use(express.urlencoded({ extended: true }));
+
 
 
 const client = new MongoClient(uri);
@@ -23,7 +27,7 @@ async function run() {
     const database = client.db('testdata');
     const users = database.collection('test');
     // Queries for a user that has a user value of 'Fruit'
-    const query = { user: 'Fruit' };
+    const query = { user: uservalue };
     const user = await users.findOne(query);
     console.log(user);
 	global.mtest = user;
@@ -49,8 +53,8 @@ application.get(`/`, async(req, res) => {
 	
 })
 
-application.post('/submit-data' , (req , res) => {
-	global.uservalue = req.body.usname;
+application.post('/submit' , (req , res) => {
+	global.uservalue = req.body;
 	console.log("username got" + uservalue);
 	
 })
