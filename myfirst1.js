@@ -29,14 +29,13 @@ async function run() {
     const database = client.db('testdata');
     const users = database.collection('test');
     // Queries for a user that has a user value of 'Fruit'
-    const query = { user: uservalue };
+    const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
     console.log(user);
-	if (user['Password'] == global.Password) {
+	if (user['Password'] == uservalue['Password']) {
 		global.mtest = user;
-	  
+		return mtest
 	}
-	return mtest
   } finally {
     await client.close();
   }
@@ -58,9 +57,9 @@ application.get(`/`, async(req, res) => {
 })
 
 application.post('/submit' , (req , res) => {
-	global.{ uservalue , Password } = req.body;
-	console.log("username got " + uservalue);
-	console.log("Password got " + Password);
+	global.uservalue = req.body;
+	console.log("username got " + uservalue['username']);
+	console.log("Password got " + uservalue['Password']);
 	run().catch(console.dir);
 	res.redirect('/subserver');
 	
