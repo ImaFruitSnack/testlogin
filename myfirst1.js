@@ -48,6 +48,12 @@ application.get(`/`, async(req, res) => {
 	
 })
 
+application.post('/submit-data' , (req , res) => {
+	global.uservalue = req.body.usname;
+	console.log("username got" + uservalue);
+	
+})
+
 async function listDatabases(client){
     databasesList = await client.db().admin().listDatabases();
  
