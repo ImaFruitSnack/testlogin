@@ -27,7 +27,7 @@ async function run() {
     const database = client.db('testdata');
     const users = database.collection('test');
     // Queries for a user that has a user value of 'Fruit'
-    const query = { user: uservalue };
+    const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
     console.log(user);
 	global.mtest = user;
@@ -36,7 +36,6 @@ async function run() {
     await client.close();
   }
 }
-run().catch(console.dir);
 
 
 application.get(`/`, async(req, res) => {
@@ -56,6 +55,8 @@ application.get(`/`, async(req, res) => {
 application.post('/submit' , (req , res) => {
 	global.uservalue = req.body;
 	console.log("username got" + uservalue['username']);
+	run().catch(console.dir);
+	
 	
 })
 
