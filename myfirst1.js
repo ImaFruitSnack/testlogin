@@ -10,6 +10,7 @@ const uri = process.env.mongoToken;
 const port = process.env.PORT || 8080
 global.mtest = 0;
 global.uservalue = null;
+global.Password = null;
 
 
 
@@ -28,10 +29,13 @@ async function run() {
     const database = client.db('testdata');
     const users = database.collection('test');
     // Queries for a user that has a user value of 'Fruit'
-    const query = { user: uservalue['username'] };
+    const query = { user: uservalue };
     const user = await users.findOne(query);
     console.log(user);
-	global.mtest = user;
+	if (user['Password'] == global.Password) {
+		global.mtest = user;
+	  
+	}
 	return mtest
   } finally {
     await client.close();
@@ -54,8 +58,9 @@ application.get(`/`, async(req, res) => {
 })
 
 application.post('/submit' , (req , res) => {
-	global.uservalue = req.body;
-	console.log("username got" + uservalue['username']);
+	global.{ uservalue , Password } = req.body;
+	console.log("username got " + uservalue);
+	console.log("Password got " + Password);
 	run().catch(console.dir);
 	res.redirect('/subserver');
 	
