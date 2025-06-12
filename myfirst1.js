@@ -69,14 +69,14 @@ application.post('/submit' , async(req , res) => {
 	console.log("username got " + uservalue['username']);
 	console.log("Password got " + uservalue['password']);
 	await run().catch(console.dir);
-	if (loggedin == true) {
+	if (await loggedin == true) {
 		console.log("redirecting");
 		res.redirect('/subserver');
-	} else if (loggedin == false) {
+	} else if (await loggedin == false) {
 		console.log("user errorseg");
 		alert("username or password incorrect");
 	} else {
-		console.log(global.loggedin);
+		console.log(await global.loggedin);
 	}
 	
 	
