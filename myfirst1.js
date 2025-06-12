@@ -38,12 +38,14 @@ async function run() {
 		console.log("success");
 		return mtest;
 		global.loggedin = true;
+		console.log(loggedin);
 		return loggedin;
 	} else {
 		console.log(user['password']);
 		console.log(uservalue['password']);
 		console.log(user['password'].toString() == uservalue['password'].toString());
 		global.loggedin = false;
+		console.log(loggedin);
 		return loggedin;
 	}
   } finally {
