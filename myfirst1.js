@@ -33,6 +33,10 @@ async function run() {
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
 	console.log(user)
+	if (user == null) 
+		global.loggedin = false;
+		return [loggedin,mtest];
+	}
 	if (user['password'].toString() == uservalue['password'].toString() && user['user'].toString() == uservalue['username'].toString()) {
 		console.log(user['user'].toString());
 		console.log(uservalue['username'].toString());
