@@ -55,7 +55,7 @@ async function run() {
 
 application.get(`/`, async(req, res) => {
 	// res.sendFile(path.join(path.join(__dirname, `views`), `index.html`))
-	res.render('pages/index'); 
+	res.render('pages/index' , {er:null}); 
 	//res.writeHead(200, {'Content-Type': 'text/html'});
 	//res.write("The date and time are currently: " + dt.myDateTime());
 	//res.write(req.url);
@@ -78,7 +78,7 @@ application.post('/submit' , async(req , res) => {
 	} else if (loggedin == false) {
 		console.log("user errorseg");
 		const er = "error username or password is incorect";
-		res.redirect('/' , er);
+		res.redirect('/' , {er:er});
 	} else {
 		console.log(global.loggedin);
 	}
