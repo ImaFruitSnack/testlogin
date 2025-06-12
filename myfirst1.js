@@ -32,7 +32,7 @@ async function run() {
     // Queries for a user that has a user value of 'Fruit'
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
-	if (user['password'].toString() == uservalue['password'].toString()) {
+	if (user['password'].toString() == uservalue['password'].toString() && user['user'].toString() == uservalue['username'].toString()) {
 		global.mtest = user;
 		global.loggedin = true;
 		return [loggedin,mtest];
