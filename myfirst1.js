@@ -32,19 +32,12 @@ async function run() {
     // Queries for a user that has a user value of 'Fruit'
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
-    console.log(user);
 	if (user['password'].toString() == uservalue['password'].toString()) {
 		global.mtest = user;
-		console.log("success");
 		global.loggedin = true;
-		console.log(loggedin);
 		return [loggedin,mtest];
 	} else {
-		console.log(user['password']);
-		console.log(uservalue['password']);
-		console.log(user['password'].toString() == uservalue['password'].toString());
 		global.loggedin = false;
-		console.log(loggedin);
 		return [loggedin,mtest];
 	}
   } finally {
@@ -69,17 +62,13 @@ application.get(`/`, async(req, res) => {
 
 application.post('/submit' , async(req , res) => {
 	global.uservalue = req.body;
-	console.log("username got " + uservalue['username']);
-	console.log("Password got " + uservalue['password']);
 	await run().catch(console.dir);
 	if (loggedin == true) {
-		console.log("redirecting");
 		res.redirect('/subserver');
 	} else if (loggedin == false) {
-		console.log("user errorseg");
 		res.render('pages/index' , {er:"Username Or password is incorrect"});
 	} else {
-		console.log(global.loggedin);
+		return;
 	}
 	
 	
@@ -100,8 +89,3 @@ application.get('/subserver', async(req,res) => {
 
 let server = http.createServer(application)
 server.listen(8080, `0.0.0.0`)
-/*
-application.listen(8080 , () => {
-	console.log("ggs");
-})
-*/
