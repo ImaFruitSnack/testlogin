@@ -49,6 +49,33 @@ async function run() {
   }
 }
 
+async function run2() {
+  try {
+	const client = new MongoClient(uri);
+    const database = client.db('testdata');
+    const users = database.collection('test');
+    // Queries for a user that has a user value of 'Fruit'
+    const query = { user: uservalue['username'] };
+    const user = await users.findOne(query);
+	if (user == null) {
+		const nuser = {user: uservalue['username'].toString(), password: uservalue['password'].toString()};
+		const result = await users.insertOne(nuser);
+		await run2().catch(console.dir);
+		return [loggedin,mtest];
+	}
+	if (user['password'].toString() == uservalue['password'].toString() && user['user'].toString() == uservalue['username'].toString() && uservalue['username'] != null && uservalue['password'] != null) {
+		global.mtest = user;
+		global.loggedin = true;
+		return [loggedin,mtest];
+	} else {
+		global.loggedin = false;
+		return [loggedin,mtest];
+	}
+  } finally {
+    await client.close();
+  }
+}
+
 
 application.get(`/`, async(req, res) => {
 	// res.sendFile(path.join(path.join(__dirname, `views`), `index.html`))
@@ -90,6 +117,21 @@ application.get('/subserver', async(req,res) => {
 	res.render('pages/login', await mtest);
 })
 
+application.get('/signup' , async(req,res) => {
+	res.render('pages/signup' , {er:null});
+}
+
+application.post('/sud' , async(req , res) => {
+	global.uservalue = req.body;
+	await run2().catch(console.dir);
+	if (loggedin == true) {
+		res.render('pages/index' , {er:null});
+	} else if (loggedin == false) {
+		res.render('pages/signup' , {er:"Username Or password is not filled out"});
+	} else {
+		console.log("what?");
+		return;
+	}
 
 let server = http.createServer(application)
 server.listen(8080, `0.0.0.0`)
