@@ -33,12 +33,18 @@ async function run() {
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
 	if (user['password'].toString() == uservalue['password'].toString() && user['user'].toString() == uservalue['username'].toString()) {
+		console.log(user['user'].toString());
+		console.log(uservalue['username'].toString());
+		console.log(user['user'].toString() == uservalue['username'].toString());
 		global.mtest = user;
 		global.loggedin = true;
 		return [loggedin,mtest];
 	} else {
 		global.loggedin = false;
 		return [loggedin,mtest];
+		console.log(user['user'].toString());
+		console.log(uservalue['username'].toString());
+		console.log(user['user'].toString() == uservalue['username'].toString());
 	}
   } finally {
     await client.close();
