@@ -33,7 +33,7 @@ async function run() {
     const query = { user: uservalue['username'] };
     const user = await users.findOne(query);
 	console.log(user)
-	if (user == null) 
+	if (user == null) {
 		global.loggedin = false;
 		return [loggedin,mtest];
 	}
