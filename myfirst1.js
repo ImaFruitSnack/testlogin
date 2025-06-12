@@ -38,11 +38,13 @@ async function run() {
 		console.log("success");
 		return mtest;
 		global.loggedin = true;
+		return loggedin;
 	} else {
 		console.log(user['password']);
 		console.log(uservalue['password']);
 		console.log(user['password'].toString() == uservalue['password'].toString());
 		global.loggedin = false;
+		return loggedin;
 	}
   } finally {
     await client.close();
@@ -69,14 +71,14 @@ application.post('/submit' , async(req , res) => {
 	console.log("username got " + uservalue['username']);
 	console.log("Password got " + uservalue['password']);
 	await run().catch(console.dir);
-	if (await loggedin == true) {
+	if (loggedin == true) {
 		console.log("redirecting");
 		res.redirect('/subserver');
-	} else if (await loggedin == false) {
+	} else if (loggedin == false) {
 		console.log("user errorseg");
 		alert("username or password incorrect");
 	} else {
-		console.log(await global.loggedin);
+		console.log(global.loggedin);
 	}
 	
 	
