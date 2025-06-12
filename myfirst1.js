@@ -75,6 +75,8 @@ application.post('/submit' , async(req , res) => {
 	} else if (loggedin == false) {
 		console.log("user errorseg");
 		alert("username or password incorrect");
+	} else {
+		console.log(loggedin);
 	}
 	
 	
