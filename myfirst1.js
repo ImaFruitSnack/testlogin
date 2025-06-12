@@ -77,8 +77,7 @@ application.post('/submit' , async(req , res) => {
 		res.redirect('/subserver');
 	} else if (loggedin == false) {
 		console.log("user errorseg");
-		const er = "error username or password is incorect";
-		res.redirect(`/` , {er:er});
+		res.redirect('/.' , {er:"Username Or password is incorrect"});
 	} else {
 		console.log(global.loggedin);
 	}
