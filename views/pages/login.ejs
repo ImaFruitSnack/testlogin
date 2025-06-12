@@ -5,6 +5,20 @@
 <p>Welcome <%=user%></p>
 <img src="Fruity_png_2.png" width="104" height="142"></img>
 <button onclick="document.location='../?year=2017&month=July'">click me</button>
-<button>this button does nothing</button>
+<button id="ASong" onClick="playPause()">
+  <audio
+    src="yippee-tbh.mp3"
+  ></audio>
+  this button does nothing
+</button>
+
+<script>
+  var aud = document.getElementById("ASong").children[0];
+  aud.pause();
+
+  function playPause() {
+	aud.play();
+  }
+</script>
 </body>
 </html>
