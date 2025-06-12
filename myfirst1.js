@@ -119,7 +119,7 @@ application.get('/subserver', async(req,res) => {
 
 application.get('/signup' , async(req,res) => {
 	res.render('pages/signup' , {er:null});
-}
+})
 
 application.post('/sud' , async(req , res) => {
 	global.uservalue = req.body;
@@ -132,6 +132,7 @@ application.post('/sud' , async(req , res) => {
 		console.log("what?");
 		return;
 	}
+})
 
 let server = http.createServer(application)
 server.listen(8080, `0.0.0.0`)
